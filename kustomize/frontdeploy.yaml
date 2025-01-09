@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: 710281024320.dkr.ecr.ap-northeast-2.amazonaws.com/ingress-kitchen:b04b253
+        image: 710281024320.dkr.ecr.ap-northeast-2.amazonaws.com/ingress-kitchen:ac195ba
         ports:
         - containerPort: 8000
         env:
