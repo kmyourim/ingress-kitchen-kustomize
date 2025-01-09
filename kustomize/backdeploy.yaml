@@ -31,3 +31,5 @@ spec:
             configMapKeyRef:
               name: backend-cf
               key: GUESTBOOK_DB_ADDR
+      imagePullSecrets:
+      - name: ecr-secret
