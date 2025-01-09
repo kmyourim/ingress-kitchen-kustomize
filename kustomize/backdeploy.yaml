@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: imyourkm/backend:test
+        image: 710281024320.dkr.ecr.ap-northeast-2.amazonaws.com/ingress-kitchen:1cfa3a8
         ports:
         - containerPort: 8000
         env:
