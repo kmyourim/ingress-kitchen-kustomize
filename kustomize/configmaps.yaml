@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-cf
+  namespace: frontend-ns
+data:
+  FRONTEND_PORT: "8000"
+  GUESTBOOK_API_ADDR: "backend.backend-ns.svc.cluster.local:8000"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-cf
+  namespace: backend-ns
+data:
+  BACKEND_PORT: "8000"
+  GUESTBOOK_DB_ADDR: "mongodb.db-ns.svc.cluster.local:27017"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-cf
+  namespace: db-ns
+data:
+  MONGO_DB_PORT: "27017"
