@@ -3,5 +3,7 @@ kind: Kustomization
 
 resources:
   - configmaps.yaml
-  - deployments.yaml
+  - frontdeploy.yaml
+  - backdeploy.yaml
+  - dbdeploy.yaml
   - services.yaml
