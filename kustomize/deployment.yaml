@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: <AWS_ECR_URI>:<TAG> # GitHub Actions에서 자동으로 업데이트
+        image: 710281024320.dkr.ecr.ap-northeast-2.amazonaws.com/ingress-kitchen
         ports:
         - containerPort: 3000
