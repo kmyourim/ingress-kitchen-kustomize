@@ -21,8 +21,8 @@ jobs:
           IMAGE_URI: ${{ secrets.IMAGE_URI }}
         run: |
           # Kustomize deployment.yaml 파일에서 이미지 태그 업데이트
-          sed -i "s|newTag:.*|newTag: $(echo $IMAGE_URI | awk -F: '{print $2}')|g" ./kustomize/deployment.yaml
-          sed -i "s|image:.*|image: $(echo $IMAGE_URI | awk -F: '{print $1}')|g" ./kustomize/deployment.yaml
+          sed -i "s|newTag:.*|newTag: $(echo $IMAGE_URI | awk -F: '{print $2}')|g" ./deployment.yaml
+          sed -i "s|image:.*|image: $(echo $IMAGE_URI | awk -F: '{print $1}')|g" ./deployment.yaml
 
       # 3. 변경사항 커밋 및 푸시
       - name: Commit and Push Changes
