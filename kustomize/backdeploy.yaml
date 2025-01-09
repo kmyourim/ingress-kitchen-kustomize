@@ -1,1 +1,33 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: backend-ns
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: imyourkm/backend:test
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: backend-cf
+              key: BACKEND_PORT
+        - name: GUESTBOOK_DB_ADDR
+          valueFrom:
+            configMapKeyRef:
+              name: backend-cf
+              key: GUESTBOOK_DB_ADDR
