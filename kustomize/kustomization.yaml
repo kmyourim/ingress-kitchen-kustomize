@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: default # 기본 네임스페이스 설정
 
 resources:
-  - namespaces.yaml
   - configmaps.yaml
   - deployments.yaml
   - services.yaml
