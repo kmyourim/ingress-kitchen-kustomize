@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: frontend-ns
+  labels:
+    app: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: 710281024320.dkr.ecr.ap-northeast-2.amazonaws.com/ingress-kitchen:cb63dce
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-cf
+              key: FRONTEND_PORT
+        - name: GUESTBOOK_API_ADDR
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-cf
+              key: GUESTBOOK_API_ADDR
+      imagePullSecrets:
+      - name: ecr-secret
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: backend-ns
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: imyourkm/backend:test
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: backend-cf
+              key: BACKEND_PORT
+        - name: GUESTBOOK_DB_ADDR
+          valueFrom:
+            configMapKeyRef:
+              name: backend-cf
+              key: GUESTBOOK_DB_ADDR
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  namespace: db-ns
+  labels:
+    app: mongodb
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: imyourkm/mongodb:test
+        ports:
+        - containerPort: 27017
+        env:
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: db-cf
+              key: MONGO_DB_PORT
